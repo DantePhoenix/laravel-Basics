@@ -1,9 +1,8 @@
 @extends ('template')
 
 @section('menu')
-    <h1>
-        Detalle
-    </h1>
+<h1>{{ $post -> title}}</h1>
 
-    {{ $post }}
-@endsection
+<p> {{ $post -> body}}</p>
+
+    @endsection

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
+
+use App\Models\Post;
 
 class PageController extends Controller
 {
@@ -12,15 +13,18 @@ class PageController extends Controller
 
     public function blog()
     {
-        //Ejemplo de una consulta a DB
-        $posts = [['id' => '1', 'title' => 'PHP', 'slug' => 'php'], 
-                          ['id' => '2', 'title' => 'Laravel', 'slug' => 'laravel']];
+        // $posts = Post::get(); // consulta get de elocuent a la tabla
+        //$post = Post::first(); // mostrar la info del primer registro en formato json
+        //$post = Post::find(25); // buscar por id
+        //dd($post);
+
+        $posts = Post::latest() -> paginate(); 
+ 
         return view('blog', ['posts' => $posts]);
     }
 
-    public function post($slug)
+    public function post(Post $post)
     {
-        $post = $slug;
         return view('post', ['post' => $post]);
     }
 }
